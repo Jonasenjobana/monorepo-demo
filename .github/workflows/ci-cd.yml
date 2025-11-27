@@ -19,20 +19,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'pnpm'
-      
-      # 使用pnpm官方action安装pnpm，确保正确配置
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
-          run_install: false
+          cache: 'npm'  # 使用npm缓存
       
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
       
       - name: Build packages
-        run: pnpm run build
+        run: npm run build
       
       # 只有在主分支上才执行版本管理和发布
       - name: Version and Changelog
@@ -73,20 +66,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'pnpm'
-      
-      # 使用pnpm官方action安装pnpm，确保正确配置
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
-          run_install: false
+          cache: 'npm'
       
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
       
       - name: Build frontend (pkg-1)
-        run: cd packages/pkg-1 && pnpm run build
+        run: cd packages/pkg-1 && npm run build
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
