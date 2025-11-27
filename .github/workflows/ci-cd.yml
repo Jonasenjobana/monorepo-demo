@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]  # 主分支推送触发
+    branches: [master]  # 主分支推送触发
 
 jobs:
   build-deploy:
