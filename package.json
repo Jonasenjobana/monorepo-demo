@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "name": "monorepo-demo",
   "private": true,
   "workspaces": [
@@ -19,7 +19,7 @@
     "release:major": "standard-version --release-as major",
     "release:patch": "standard-version --release-as patch",
     "changelog": "standard-version --dry-run --no-verify",
-    "prepare": "husky install"  
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
