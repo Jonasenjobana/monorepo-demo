@@ -1,8 +1,10 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [master]  # 主分支推送触发
+    push:
+      branches: [master]  # 主分支推送触发
+    pull_request:
+      branches: [master]  # PR到主分支时也触发构建检查，但不部署
 
 jobs:
   build-deploy:
@@ -46,4 +48,5 @@ jobs:
           path: './packages/pkg-1/dist'
 
       - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: actions/deploy-pages@v4
