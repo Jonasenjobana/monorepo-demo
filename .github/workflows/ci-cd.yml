@@ -20,17 +20,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'pnpm'  # 缓存pnpm依赖
 
-      - name: Install pnpm
-        run: npm install -g pnpm  # 安装pnpm（若Runner未预装）
+      - name: Prepare pnpm（Node.js 22内置corepack）
+        run: corepack prepare pnpm@latest --activate  # 安装并激活pnpm（可指定版本如pnpm@9.0.0）
 
       - name: Install dependencies
-        run: pnpm install  # 用pnpm装依赖
+        run: pnpm install --frozen-lockfile  # 锁定依赖版本，更稳定
 
       - name: Build for GitHub Pages
-        run: pnpm run build:github  # 构建GitHub版本
+        run: pnpm run build:github
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
