@@ -1,4 +1,6 @@
 # 更新日志
+## [1.0.0](https://github.com/Jonasenjobana//compare/v0.2.0...v1.0.0) (2025-11-27)
+
 ## [0.2.0](https://github.com/Jonasenjobana//compare/v0.1.1...v0.2.0) (2025-11-27)
 
 ### 0.1.1 (2025-11-27)
