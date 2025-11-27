@@ -31,6 +31,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile  # 锁定依赖版本，更稳定
 
+      - name: Build dependencies first
+        run: pnpm --filter pkg-2 run build
+      
       - name: Build for GitHub Pages
         run: pnpm run build:github
 
