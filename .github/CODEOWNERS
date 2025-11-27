@@ -1,0 +1,15 @@
+# CODEOWNERS 文件定义了自动代码审核者
+
+# 默认审核者
+* @Jonasenjobana
+
+# 工作流配置由项目维护者审核
+.github/workflows/ @Jonasenjobana
+
+# 各包目录的审核者
+/packages/pkg-1/ @Jonasenjobana
+/packages/pkg-2/ @Jonasenjobana
+/packages/pkg-3/ @Jonasenjobana
+
+# 脚本文件由项目维护者审核
+/scripts/ @Jonasenjobana
