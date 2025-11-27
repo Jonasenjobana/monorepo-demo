@@ -1,0 +1,30 @@
+{
+  "name": "pkg-2",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/pkg-2.umd.cjs",
+  "module": "./dist/pkg-2.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/pkg-2.js",
+      "require": "./dist/pkg-2.umd.cjs"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.5.0",
+    "vite": "^5.0.0",
+    "vue": "^3.3.0"
+  }
+}

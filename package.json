@@ -1,0 +1,28 @@
+{
+  "name": "monorepo-demo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:pkg1": "pnpm --filter pkg-1 run dev",
+    "dev:pkg2": "pnpm --filter pkg-2 run dev",
+    "dev:pkg3": "pnpm --filter pkg-3 run dev",
+    "build:pkg1": "pnpm --filter pkg-1 run build",
+    "build:pkg2": "pnpm --filter pkg-2 run build",
+    "build:pkg3": "pnpm --filter pkg-3 run build",
+    "build": "pnpm run build:pkg2 && pnpm run build:pkg1 && pnpm run build:pkg3",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "release:patch": "standard-version --release-as patch",
+    "changelog": "standard-version --dry-run --no-verify",
+    "prepare": "husky install"  
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "husky": "^9.1.7",
+    "standard-version": "^9.5.0"
+  }
+}
