@@ -1,86 +1,44 @@
-name: CI/CD Pipeline
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+    branches: [main]  # 主分支推送触发
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # 确保获取完整的git历史用于变更日志生成
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'  # 使用npm缓存
-      
-      - name: Install dependencies
-        run: npm install
-      
-      - name: Build packages
-        run: npm run build
-      
-      # 只有在主分支上才执行版本管理和发布
-      - name: Version and Changelog
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-        run: |
-          # 配置git用户信息
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          
-          # 使用standard-version自动更新版本和生成变更日志
-          npx standard-version
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Push changes
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-          tags: true
-  
-  # GitHub Pages 部署作业
-  deploy-pages:
-    needs: build
+  build-deploy:
     runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-    
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
-      
+          cache: 'pnpm'  # 缓存pnpm依赖
+
+      - name: Install pnpm
+        run: npm install -g pnpm  # 安装pnpm（若Runner未预装）
+
       - name: Install dependencies
-        run: npm install
-      
-      - name: Build frontend (pkg-1)
-        run: cd packages/pkg-1 && npm run build
-      
+        run: pnpm install  # 用pnpm装依赖
+
+      - name: Build for GitHub Pages
+        run: pnpm run build:github  # 构建GitHub版本
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './packages/pkg-1/dist'
-      
+          path: './dist'
+
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
