@@ -21,8 +21,15 @@ jobs:
           node-version: '18'
           cache: 'pnpm'
       
+      # 使用pnpm官方action安装pnpm，确保正确配置
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: false
+      
       - name: Install dependencies
-        run: npm install -g pnpm && pnpm install
+        run: pnpm install
       
       - name: Build packages
         run: pnpm run build
@@ -68,8 +75,15 @@ jobs:
           node-version: '18'
           cache: 'pnpm'
       
+      # 使用pnpm官方action安装pnpm，确保正确配置
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: false
+      
       - name: Install dependencies
-        run: npm install -g pnpm && pnpm install
+        run: pnpm install
       
       - name: Build frontend (pkg-1)
         run: cd packages/pkg-1 && pnpm run build
