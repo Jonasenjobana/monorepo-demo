@@ -11,7 +11,7 @@
     "build:pkg1": "pnpm --filter pkg-1 run build",
     "build:pkg2": "pnpm --filter pkg-2 run build",
     "build:pkg3": "pnpm --filter pkg-3 run build",
-    "build:github": "pnpm --filter pkg-1 run build",
+    "build:github": "pnpm --filter pkg-1 run build:github",
     "build": "pnpm run build:pkg2 && pnpm run build:pkg1 && pnpm run build:pkg3",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
